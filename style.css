@@ -1,0 +1,112 @@
+
+    :root{
+      --brand:#0aa83f; --ink:#0f172a; --muted:#475569; --bg:#ffffff; --box:#f8fafc; --border:#e2e8f0;
+      --radius:14px;
+    }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;margin:0;color:var(--ink);background:var(--bg);line-height:1.65}
+    .site-wrap{max-width:1000px;margin-inline:auto;padding:24px}
+    header.hero{background:linear-gradient(135deg,#eafff1, #fff);border-bottom:1px solid var(--border)}
+    .hero h1{font-size:clamp(1.6rem,2.5vw,2.2rem);margin:0 0 6px}
+    .hero p{color:var(--muted);margin:0 0 14px}
+    .pill{display:inline-block;background:var(--box);border:1px solid var(--border);padding:6px 10px;border-radius:9999px;color:#0f5132}
+    .toc{background:var(--box);border:1px solid var(--border);padding:16px;border-radius:var(--radius);margin:20px 0}
+    .toc h2{margin-top:0;font-size:1.1rem}
+    .toc ul{margin:8px 0 0 18px}
+    h2{font-size:1.35rem;margin-top:28px}
+    h3{font-size:1.1rem;margin-top:22px}
+    .grid{display:grid;gap:16px}
+    @media(min-width:800px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:var(--box);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+    table{width:100%;border-collapse:collapse;border:1px solid var(--border);background:#fff;border-radius:var(--radius);overflow:hidden}
+    th,td{padding:12px;border-bottom:1px solid var(--border);text-align:left}
+    th{background:#f1f5f9}
+    .faq details{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px 14px;margin:12px 0}
+    .faq summary{cursor:pointer;font-weight:600;color:#0b5d2a}
+    .note{background:#fff7ed;border:1px solid #fed7aa;color:#92400e;padding:12px;border-radius:12px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+    .btn{background:var(--brand);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;border:0;display:inline-block}
+    .btn--ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;background:#0f172a;color:#e2e8f0;border-radius:8px;padding:2px 6px}
+    footer{margin:40px 0 10px;color:var(--muted);font-size:.95rem}
+    a{
+        text-decoration: none;
+    }
+            hr {
+
+                height: 3px; /* Set the height of the line */
+                background-color: #0aa83f; /* Set the background color (which becomes the line color) */
+                border: none; /* Remove the default border for a solid color */
+            }
+
+
+ /* --- Styles for the Popup --- */
+
+        /* The semi-transparent background overlay */
+        .popup-overlay {
+            position: fixed; /* Stays in place even when scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Black with 60% opacity */
+            z-index: 1000; /* Ensures it's on top of other content */
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* The main popup box */
+        .popup-box {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 90%;
+            max-width: 400px; /* Limits width on larger screens */
+            position: relative; /* Needed for positioning the close button */
+            font-family: sans-serif;
+        }
+
+        .popup-box h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .popup-box p {
+            color: #0c0b0b;
+            margin-bottom: 20px;
+            font-family: monospace ;
+        }
+
+        /* The "Join" button */
+        .popup-join-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0aa83f; /* WhatsApp green */
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-join-btn:hover {
+            background-color: #014e1d; /* Darker WhatsApp green */
+        }
+
+        /* The "Cancel" button */
+        .popup-cancel-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #535353;
+            cursor: pointer;
+        }
