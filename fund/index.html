@@ -10,9 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+    <script type="module">
+        // --- IMPORTS ---
+        // 1. Import FingerprintJS (Fixes the error)
+        import FingerprintJS from 'https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/+esm';
 
-    <script>
+        // 2. Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        // ... rest of your code ...
+    </script>
+
+        <script>
         tailwind.config = {
             theme: {
                 extend: {
